@@ -1,8 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import App from "../App";
-import { hasUncaughtExceptionCaptureCallback } from "process";
-import { timeStamp } from "console";
+import EventList from "../EventList";
 
 describe("<App /> component", () => {
   test("render list of events", () => {
