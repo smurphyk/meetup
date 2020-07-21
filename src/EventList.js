@@ -3,13 +3,10 @@ import React, { Component } from "react";
 import Event from "./Event";
 
 class EventList extends Component {
-  constructor() {
-    super();
+  state = {
+    events: [],
+  };
 
-    this.state = {
-      events: [],
-    };
-  }
   render() {
     return (
       <ul className="EventList">
