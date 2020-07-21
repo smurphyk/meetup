@@ -1,14 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
+import { getSuggestions } from './api';
 
 class CitySearch extends Component {
   state = {
-    query: "",
+    query: '',
     suggestions: [],
   };
 
   handleInputChanged = (event) => {
     const value = event.target.value;
     this.setState({ query: value });
+    getSuggestions(value).then((suggestions) => this.setState({ suggestions }));
   };
 
   handleItemClicked = (value) => {
@@ -17,14 +19,14 @@ class CitySearch extends Component {
 
   render() {
     return (
-      <div className="CitySearch">
+      <div className='CitySearch'>
         <input
-          type="text"
-          className="city"
+          type='text'
+          className='city'
           value={this.state.query}
           onChange={this.handleInputChanged}
         />
-        <ul className="suggestions">
+        <ul className='suggestions'>
           {this.state.suggestions.map((item) => (
             <li
               key={item.name_string}
