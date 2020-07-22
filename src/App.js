@@ -6,19 +6,42 @@ import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from './api';
 
 class App extends Component {
+  _isMounted = false;
+
   state = {
     events: [],
+    page: null
   };
-  updateEvents = (lat, lon) => {
-    getEvents(lat, lon).then((events) => this.setState({ events }));
-  };
+
+  componentDidMount() {
+    this._isMounted = true;
+    this.updateEvents();
+  }
+
+  updateEvents = (lat, lon, page) => {
+    getEvents(lat, lon, page ? page : this.state.page).then(events => {
+      if (this._isMounted) {
+        this.setState({ events })
+      }
+    });
+
+    if (page) {
+      this.setState({
+        page
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
   render() {
     return (
       <div className='App'>
         <CitySearch updateEvents={this.updateEvents} />
         <EventList events={this.state.events} />
-        <NumberOfEvents />
+        <NumberOfEvents updateEvents={this.updateEvents} />
       </div>
     );
   }

@@ -4,19 +4,21 @@ import { getSuggestions } from './api';
 class CitySearch extends Component {
   state = {
     query: '',
-    suggestions: [],
-  };
+    suggestions: []
+  }
 
   handleInputChanged = (event) => {
     const value = event.target.value;
     this.setState({ query: value });
-    getSuggestions(value).then((suggestions) => this.setState({ suggestions }));
+    getSuggestions(value).then(suggestions => {
+      this.setState({ suggestions })
+    });
   };
 
-  handleItemClicked = (value, lat, lon) => {
-    this.setState({ query: value, suggestions: [] });
-    this.props.updateEvents(lat, lon);
-  };
+  handleItemClicked = (name_string, lat, lon) => {
+    this.setState({ query: name_string, suggestions: [] });
+    this.props.updateEvents(lat, lon, null);
+  }
 
   render() {
     return (
@@ -29,7 +31,7 @@ class CitySearch extends Component {
           onChange={this.handleInputChanged}
         />
         <ul className='suggestions'>
-          {this.state.suggestions.map((item) => (
+          {this.state.suggestions.map(item =>
             <li
               key={item.name_string}
               onClick={() =>
@@ -38,7 +40,7 @@ class CitySearch extends Component {
             >
               {item.name_string}
             </li>
-          ))}
+          )}
         </ul>
       </div>
     );

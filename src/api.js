@@ -102,38 +102,43 @@ async function getSuggestions(query) {
         zip: 'EX14 9JG',
         lat: 50.79,
         lon: -3.12,
-      },
+      }
     ];
   }
 
   const token = await getAccessToken();
 
   if (token) {
-    const url =
-      'https://api.meetup.com/find/locations?&sign=true&photo-host=public&query=' +
-      query +
-      '&access_token=' +
-      token;
+    const url = 'https://api.meetup.com/find/locations?&sign=true&photo-host=public&query=' +
+      query
+      + '&access_token='
+      + token;
     const result = await axios.get(url);
     return result.data;
   }
   return [];
 }
 
-async function getEvents(lat, lon) {
+async function getEvents(lat, lon, page) {
   if (window.location.href.startsWith('http://localhost')) {
-    return mockEvents.events;
+    if (page) {
+      return mockEvents.events.slice(0, page);
+    } else {
+      return mockEvents.events;
+    }
   }
 
   const token = await getAccessToken();
   if (token) {
-    let url =
-      'https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public' +
+    let url = 'https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public' +
       '&access_token=' +
       token;
 
     if (lat && lon) {
       url += '&lat=' + lat + '&lon=' + lon;
+    }
+    if (page) {
+      url += '&page=' + page;
     }
     const result = await axios.get(url);
     return result.data.events;
@@ -145,13 +150,11 @@ async function getAccessToken() {
   const accessToken = localStorage.getItem('access_token');
 
   if (!accessToken) {
-    const searchParams = new URLSearchParams(window.location.href);
+    const searchParams = new URLSearchParams(window.location.search);
     const code = searchParams.get('code');
 
     if (!code) {
-      window.location.href(
-        'https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=http://smurphyk.github.io/meetup/'
-      );
+      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=http://smurphyk.github.io/meetup/';
       return null;
     }
     return getOrRenewAccessToken('get', code);
@@ -169,17 +172,20 @@ async function getAccessToken() {
 
 async function getOrRenewAccessToken(type, key) {
   let url;
+  let tokenInfo;
   if (type === 'get') {
     url =
       'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' +
       key;
-  } else if (type === 'renew') {
-    url =
-      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
-      key;
-  }
 
-  const tokenInfo = await axios.get(url);
+    tokenInfo = await axios.get(url);
+
+  } else if (type === 'renew') {
+    url = 'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
+      key;
+
+    tokenInfo = await axios.post(url);
+  }
 
   localStorage.setItem('access_token', tokenInfo.data.access_token);
   localStorage.setItem('refresh_token', tokenInfo.data.refresh_token);

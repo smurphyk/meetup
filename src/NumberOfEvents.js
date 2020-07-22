@@ -3,31 +3,31 @@ import React, { Component } from 'react';
 class NumberOfEvents extends Component {
   state = {
     eventNumber: 32,
-  };
+  }
 
   changeNumber = (event) => {
+    const value = event.target.value;
     this.setState({
-      eventNumber: event.target.value,
-    });
-  };
+      eventNumber: value,
+    })
+    this.props.updateEvents(null, null, value);
+  }
 
   render() {
     return (
       <div className='NumberOfEvents'>
-        <p className='Number-label'>
-          Show{' '}
-          <span className='Number-input'>
+        <span className='Number-input'>
+          Show
             <input
-              className='Number-input-field'
-              type='number'
-              value={this.state.eventNumber}
-              onChange={this.changeNumber}
-            />
-          </span>{' '}
+            className='Number-input-field'
+            type='number'
+            value={this.state.eventNumber}
+            onChange={this.changeNumber}
+          />
           Events
-        </p>
-      </div>
-    );
+        </span>
+      </div >
+    )
   }
 }
 

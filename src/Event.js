@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 
 class Event extends Component {
   state = {
-    showDetails: false,
-  };
+    showDetails: false
+  }
 
   toggleDetails = () => {
     this.setState({
-      showDetails: !this.state.showDetails,
-    });
-  };
+      showDetails: !this.state.showDetails
+    })
+  }
 
   render() {
     const { event } = this.props;
@@ -23,9 +23,9 @@ class Event extends Component {
         <p className='Event-rsvp'>
           {event.yes_rsvp_count + ' people are attending'}
         </p>
-        {this.state.showDetails ? (
+        {this.state.showDetails ?
           <span className='Event-details'>
-            {event.venue ? (
+            {event.venue ?
               <p className='Event-address'>
                 {event.venue.name +
                   ', ' +
@@ -37,7 +37,7 @@ class Event extends Component {
                   ' ' +
                   event.venue.zip}
               </p>
-            ) : null}
+              : null}
             <div
               className='Event-description'
               dangerouslySetInnerHTML={{ __html: event.description }}
@@ -47,16 +47,18 @@ class Event extends Component {
               Event Link
             </a>
           </span>
-        ) : null}
-        {this.state.showDetails ? (
-          <button className='Event-details-button' onClick={this.toggleDetails}>
-            Show Less
+          : null}
+        <div className="button-container">
+          {this.state.showDetails ?
+            <button className='Event-details-button' onClick={this.toggleDetails}>
+              Show Less
           </button>
-        ) : (
-          <button className='Event-details-button' onClick={this.toggleDetails}>
-            Details
-          </button>
-        )}
+            :
+            <button className='Event-details-button' onClick={this.toggleDetails}>
+              Details
+            </button>
+          }
+        </div>
       </div>
     );
   }
