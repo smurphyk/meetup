@@ -14,7 +14,7 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('render label', () => {
-    expect(NumberWrapper.find('.Number-label')).toHaveLength(1);
+    expect(NumberWrapper.find('.Number-input')).toHaveLength(1);
   });
 
   test('render input span', () => {
