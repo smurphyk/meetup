@@ -142,7 +142,7 @@ async function getEvents(lat, lon) {
 }
 
 async function getAccessToken() {
-  const getAccessToken = localStorage.getItem('access_token');
+  const accessToken = localStorage.getItem('access_token');
 
   if (!accessToken) {
     const searchParams = new URLSearchParams(window.location.href);
