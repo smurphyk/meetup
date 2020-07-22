@@ -25,27 +25,38 @@ class Event extends Component {
         </p>
         {this.state.showDetails ? (
           <span className='Event-details'>
-            <p className='Event-address'>
-              {event.venue.name +
-                ', ' +
-                event.venue.address_1 +
-                ', ' +
-                event.venue.city +
-                ', ' +
-                event.venue.state +
-                ' ' +
-                event.venue.zip}
-            </p>
-            <p className='Event-description'>{event.description}</p>
+            {event.venue ? (
+              <p className='Event-address'>
+                {event.venue.name +
+                  ', ' +
+                  event.venue.address_1 +
+                  ', ' +
+                  event.venue.city +
+                  ', ' +
+                  event.venue.state +
+                  ' ' +
+                  event.venue.zip}
+              </p>
+            ) : null}
+            <div
+              className='Event-description'
+              dangerouslySetInnerHTML={{ __html: event.description }}
+            ></div>
             <p className='Event-visibility'>{event.visibility}</p>
             <a className='Event-link' href={event.link}>
               Event Link
             </a>
           </span>
         ) : null}
-        <button className='Event-details-button' onClick={this.toggleDetails}>
-          Details
-        </button>
+        {this.state.showDetails ? (
+          <button className='Event-details-button' onClick={this.toggleDetails}>
+            Show Less
+          </button>
+        ) : (
+          <button className='Event-details-button' onClick={this.toggleDetails}>
+            Details
+          </button>
+        )}
       </div>
     );
   }
