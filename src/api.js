@@ -159,7 +159,7 @@ async function getAccessToken() {
 
   const lastSavedTime = localStorage.getItem('last_saved_time');
 
-  if (accessToken && (Date.now() = lastSavedTime < 3600000)) {
+  if (accessToken && Date.now() - lastSavedTime < 3600000) {
     return accessToken;
   }
 
