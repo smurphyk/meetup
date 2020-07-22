@@ -144,10 +144,12 @@ describe('<CitySearch /> component', () => {
       ],
     });
 
+    expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(10);
     CitySearchWrapper.find('.suggestions li').at(0).simulate('click');
     expect(CitySearchWrapper.state('query')).toBe(
       'Wilmington, North Carolina, USA'
     );
+    expect(CitySearchWrapper.find('.suggestions li')).toHaveLength(0);
   });
 });
 
