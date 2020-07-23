@@ -104,7 +104,7 @@ describe('<Event /> component', () => {
     expect(EventWrapper.find('.Event-details-button')).toHaveLength(1);
   });
 
-  test('clicking details button displays details', () => {
+  test('details include address, description, visibility, and link', () => {
     EventWrapper.find('.Event-details-button').simulate('click');
     expect(EventWrapper.state('showDetails')).toBe(true);
     expect(EventWrapper.find('.Event-details')).toHaveLength(1);
