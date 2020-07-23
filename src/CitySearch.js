@@ -15,9 +15,9 @@ class CitySearch extends Component {
     });
   };
 
-  handleItemClicked = (value, lat, lon) => {
-    this.setState({ query: value, suggestions: [] });
-    this.props.updateEvents(lat, lon);
+  handleItemClicked = (name_string, lat, lon) => {
+    this.setState({ query: name_string, suggestions: [] });
+    this.props.updateEvents(lat, lon, null);
   }
 
   render() {
