@@ -107,12 +107,10 @@ async function getSuggestions(query) {
   }
 
   const token = await getAccessToken();
-
   if (token) {
-    const url = 'https://api.meetup.com/find/locations?&sign=true&photo-host=public&query=' +
-      query
-      + '&access_token='
-      + token;
+    const url = 'https://api.meetup.com/find/locations?&sign=true&photo-host=public&query='
+      + query
+      + '&access_token=' + token;
     const result = await axios.get(url);
     return result.data;
   }
@@ -123,26 +121,51 @@ async function getEvents(lat, lon, page) {
   if (window.location.href.startsWith('http://localhost')) {
     if (page) {
       return mockEvents.events.slice(0, page);
-    } else {
+    }
+    else {
       return mockEvents.events;
     }
   }
 
+  if (!navigator.onLine) {
+    const events = localStorage.getItem('lastEvents');
+    return JSON.parse(events);
+  }
+
   const token = await getAccessToken();
   if (token) {
-    let url = 'https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public' +
-      '&access_token=' +
-      token;
-
-    if (lat && lon) {
+    let url = 'https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public'
+      + '&access_token=' + token;
+    if (lat && lon && page) {
       url += '&lat=' + lat + '&lon=' + lon;
-    }
-    if (page) {
       url += '&page=' + page;
+      localStorage.setItem('lat', lat);
+      localStorage.setItem('lon', lon);
+    }
+    if (lat && lon && !page) {
+      url += '&lat=' + lat + '&lon=' + lon;
+      localStorage.setItem('lat', lat);
+      localStorage.setItem('lon', lon);
+    }
+    if (page && !lat) {
+      if (!localStorage.getItem('lat')) {
+        url += '&page=' + page;
+      }
+      else {
+        url += '&lat=' + localStorage.getItem('lat') + '&lon=' + localStorage.getItem('lon');
+        url += '&page=' + page;
+      }
+
     }
     const result = await axios.get(url);
-    return result.data.events;
+    const events = result.data.events;
+    if (events.length) {
+      localStorage.setItem('lastEvents', JSON.stringify(events));
+    }
+
+    return events;
   }
+
   return [];
 }
 
@@ -154,7 +177,7 @@ async function getAccessToken() {
     const code = searchParams.get('code');
 
     if (!code) {
-      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=http://smurphyk.github.io/meetup/';
+      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=mtfrifukvgtkbuoe34mesrflrf&response_type=code&redirect_uri=https://hunter547.github.io/meetup-app/';
       return null;
     }
     return getOrRenewAccessToken('get', code);
@@ -166,6 +189,7 @@ async function getAccessToken() {
     return accessToken;
   }
 
+  // If the access_token is expired, we try to renew it by using refresh_token
   const refreshToken = localStorage.getItem('refresh_token');
   return getOrRenewAccessToken('renew', refreshToken);
 }
@@ -174,15 +198,14 @@ async function getOrRenewAccessToken(type, key) {
   let url;
   let tokenInfo;
   if (type === 'get') {
-    url =
-      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' +
-      key;
+    url = 'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/'
+      + key;
 
     tokenInfo = await axios.get(url);
 
   } else if (type === 'renew') {
-    url = 'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
-      key;
+    url = 'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/'
+      + key;
 
     tokenInfo = await axios.post(url);
   }
