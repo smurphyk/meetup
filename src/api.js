@@ -177,7 +177,7 @@ async function getAccessToken() {
     const code = searchParams.get('code');
 
     if (!code) {
-      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=mtfrifukvgtkbuoe34mesrflrf&response_type=code&redirect_uri=https://hunter547.github.io/meetup-app/';
+      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=https://smurphyk.github.io/meetup/';
       return null;
     }
     return getOrRenewAccessToken('get', code);
