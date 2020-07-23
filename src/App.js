@@ -10,7 +10,7 @@ class App extends Component {
 
   state = {
     events: [],
-    page: null
+    page: null,
   };
 
   componentDidMount() {
@@ -19,18 +19,18 @@ class App extends Component {
   }
 
   updateEvents = (lat, lon, page) => {
-    getEvents(lat, lon, page ? page : this.state.page).then(events => {
+    getEvents(lat, lon, page ? page : this.state.page).then((events) => {
       if (this._isMounted) {
-        this.setState({ events })
+        this.setState({ events });
       }
     });
 
     if (page) {
       this.setState({
-        page
-      })
+        page,
+      });
     }
-  }
+  };
 
   componentWillUnmount() {
     this._isMounted = false;

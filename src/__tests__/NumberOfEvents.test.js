@@ -1,12 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import NumberOfEvents from '../NumberOfEvents';
-import App from '../App';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberWrapper;
   beforeAll(() => {
-    NumberWrapper = shallow(<NumberOfEvents updateEvents={() => { }} />);
+    NumberWrapper = shallow(<NumberOfEvents updateEvents={() => {}} />);
   });
 
   test('render NumberOfEvents div', () => {
@@ -26,8 +25,8 @@ describe('<NumberOfEvents /> component', () => {
   });
 
   test('change value in number-input-field', () => {
-    const eventObject = { target: { value: 32 } };
+    const eventObject = { target: { value: 20 } };
     NumberWrapper.find('.Number-input-field').simulate('change', eventObject);
-    expect(NumberWrapper.state('eventNumber')).toBe(32);
-  })
+    expect(NumberWrapper.state('eventNumber')).toBe(20);
+  });
 });

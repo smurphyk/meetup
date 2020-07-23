@@ -102,15 +102,17 @@ async function getSuggestions(query) {
         zip: 'EX14 9JG',
         lat: 50.79,
         lon: -3.12,
-      }
+      },
     ];
   }
 
   const token = await getAccessToken();
   if (token) {
-    const url = 'https://api.meetup.com/find/locations?&sign=true&photo-host=public&query='
-      + query
-      + '&access_token=' + token;
+    const url =
+      'https://api.meetup.com/find/locations?&sign=true&photo-host=public&query=' +
+      query +
+      '&access_token=' +
+      token;
     const result = await axios.get(url);
     return result.data;
   }
@@ -121,8 +123,7 @@ async function getEvents(lat, lon, page) {
   if (window.location.href.startsWith('http://localhost')) {
     if (page) {
       return mockEvents.events.slice(0, page);
-    }
-    else {
+    } else {
       return mockEvents.events;
     }
   }
@@ -134,8 +135,10 @@ async function getEvents(lat, lon, page) {
 
   const token = await getAccessToken();
   if (token) {
-    let url = 'https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public'
-      + '&access_token=' + token;
+    let url =
+      'https://api.meetup.com/find/upcoming_events?&sign=true&photo-host=public' +
+      '&access_token=' +
+      token;
     if (lat && lon && page) {
       url += '&lat=' + lat + '&lon=' + lon;
       url += '&page=' + page;
@@ -150,12 +153,14 @@ async function getEvents(lat, lon, page) {
     if (page && !lat) {
       if (!localStorage.getItem('lat')) {
         url += '&page=' + page;
-      }
-      else {
-        url += '&lat=' + localStorage.getItem('lat') + '&lon=' + localStorage.getItem('lon');
+      } else {
+        url +=
+          '&lat=' +
+          localStorage.getItem('lat') +
+          '&lon=' +
+          localStorage.getItem('lon');
         url += '&page=' + page;
       }
-
     }
     const result = await axios.get(url);
     const events = result.data.events;
@@ -177,7 +182,8 @@ async function getAccessToken() {
     const code = searchParams.get('code');
 
     if (!code) {
-      window.location.href = 'https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=https://smurphyk.github.io/meetup/';
+      window.location.href =
+        'https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=https://smurphyk.github.io/meetup/';
       return null;
     }
     return getOrRenewAccessToken('get', code);
@@ -185,7 +191,7 @@ async function getAccessToken() {
 
   const lastSavedTime = localStorage.getItem('last_saved_time');
 
-  if (accessToken && (Date.now() - lastSavedTime < 3600000)) {
+  if (accessToken && Date.now() - lastSavedTime < 3600000) {
     return accessToken;
   }
 
@@ -196,19 +202,17 @@ async function getAccessToken() {
 
 async function getOrRenewAccessToken(type, key) {
   let url;
-  let tokenInfo;
   if (type === 'get') {
-    url = 'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/'
-      + key;
-
-    tokenInfo = await axios.get(url);
-
+    url =
+      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' +
+      key;
   } else if (type === 'renew') {
-    url = 'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/'
-      + key;
-
-    tokenInfo = await axios.post(url);
+    url =
+      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
+      key;
   }
+
+  const tokenInfo = await axios.get(url);
 
   localStorage.setItem('access_token', tokenInfo.data.access_token);
   localStorage.setItem('refresh_token', tokenInfo.data.refresh_token);

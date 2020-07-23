@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CitySearch from '../CitySearch';
 
-describe('<CitySearch /> component', () => {
+describe('Render <CitySearch /> component', () => {
   let CitySearchWrapper;
   beforeAll(() => {
     CitySearchWrapper = shallow(<CitySearch updateEvents={() => {}} />);

@@ -33,7 +33,11 @@ describe('<App /> integration', () => {
     const CitySearchWrapper = AppWrapper.find(CitySearch);
     CitySearchWrapper.instance().handleItemClicked('name_string', 1.1, 1.2);
     expect(AppWrapper.instance().updateEvents).toHaveBeenCalledTimes(1);
-    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(1.1, 1.2);
+    expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(
+      1.1,
+      1.2,
+      null
+    );
     AppWrapper.unmount();
   });
 
