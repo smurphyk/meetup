@@ -4,7 +4,6 @@ import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from './api';
-import { InfoAlert, ErrorAlert } from './Alert';
 
 class App extends Component {
   _isMounted = false;
