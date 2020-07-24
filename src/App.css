@@ -125,3 +125,10 @@ input[type='number'] {
   margin: 20px 0 50px;
   text-align: right;
 }
+
+.upcoming-title {
+  background-color: #696969;
+  color: #fff;
+  border: 5px outset #348ceb;
+  border-radius: 4px;
+}

@@ -25,18 +25,36 @@ class InfoAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = 'blue';
-    this.backgroundColor = 'white';
+  }
+
+  getStyle = () => {
+    return {
+      color: this.color,
+      backgroundColor: '#000',
+      fontWeight: 'bold',
+      borderRadius: '3px',
+      padding: '5px',
+      margin: '1rem auto'
+    };
   }
 }
-
-export { InfoAlert };
 
 class ErrorAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = 'red';
-    this.backgroundColor = 'white';
+  }
+
+  getStyle = () => {
+    return {
+      color: this.color,
+      backgroundColor: '#000',
+      fontWeight: 'bold',
+      borderRadius: '3px',
+      padding: '5px',
+      margin: '1rem auto'
+    };
   }
 }
 
-export { ErrorAlert };
+export { InfoAlert, ErrorAlert };
