@@ -204,11 +204,11 @@ async function getOrRenewAccessToken(type, key) {
   let url;
   if (type === 'get') {
     url =
-      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' +
+      'https://cors-anywhere.herokuapp.com/https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' +
       key;
   } else if (type === 'renew') {
     url =
-      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
+      'https://cors-anywhere.herokuapp.com/https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
       key;
   }
 
