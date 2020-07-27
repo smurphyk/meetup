@@ -13,7 +13,7 @@ class App extends Component {
     events: [],
     page: null,
     warningText: '',
-  }
+  };
 
   componentDidMount() {
     this._isMounted = true;
@@ -23,7 +23,7 @@ class App extends Component {
   updateEvents = (lat, lon, page) => {
     getEvents(lat, lon, page ? page : this.state.page).then((events) => {
       if (this._isMounted) {
-        this.setState({ events })
+        this.setState({ events });
         if (!navigator.onLine) {
           this.setState({
             warningText: 'You are currently offline.  Cached data is being displayed.'
@@ -39,8 +39,8 @@ class App extends Component {
 
     if (page) {
       this.setState({
-        page
-      })
+        page,
+      });
     }
   }
 
