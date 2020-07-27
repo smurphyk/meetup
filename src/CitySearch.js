@@ -5,18 +5,19 @@ import { InfoAlert } from './Alert';
 class CitySearch extends Component {
   state = {
     query: '',
-    suggestions: []
-  }
+    suggestions: [],
+  };
 
   handleInputChanged = (event) => {
     const value = event.target.value;
     this.setState({ query: value });
-    getSuggestions(value).then(suggestions => {
+    getSuggestions(value).then((suggestions) => {
       this.setState({ suggestions });
 
       if (value && suggestions.length === 0) {
         this.setState({
-          infoText: 'That city does not exist on this Earth. If you are from a different planet or dimension, you should probably go back and use the meetup app there.',
+          infoText:
+            'That city does not exist on this Earth. If you are from a different planet or dimension, you should probably go back and use the meetup app there.',
         });
       } else {
         this.setState({
@@ -29,7 +30,7 @@ class CitySearch extends Component {
   handleItemClicked = (name_string, lat, lon) => {
     this.setState({ query: name_string, suggestions: [] });
     this.props.updateEvents(lat, lon, null);
-  }
+  };
 
   render() {
     return (
@@ -43,7 +44,7 @@ class CitySearch extends Component {
           onChange={this.handleInputChanged}
         />
         <ul className='suggestions'>
-          {this.state.suggestions.map(item =>
+          {this.state.suggestions.map((item) => (
             <li
               key={item.name_string}
               onClick={() =>
@@ -52,7 +53,7 @@ class CitySearch extends Component {
             >
               {item.name_string}
             </li>
-          )}
+          ))}
         </ul>
       </div>
     );

@@ -4,32 +4,33 @@ import { ErrorAlert } from './Alert';
 class NumberOfEvents extends Component {
   state = {
     eventNumber: 32,
-  }
+  };
 
   changeNumber = (event) => {
     const value = event.target.value;
     this.setState({
-      eventNumber: value
-    })
+      eventNumber: value,
+    });
     if (value < 1 || !value) {
       this.setState({
-        errorText: 'You entered a number less than 1. Please either change it or get a new hobby.'
-      })
+        errorText:
+          'You entered a number less than 1. Please either change it or get a new hobby.',
+      });
     } else {
       this.setState({
-        errorText: ''
-      })
+        errorText: '',
+      });
       this.props.updateEvents(null, null, value);
     }
-  }
+  };
 
   render() {
     return (
       <div className='NumberOfEvents'>
-        <ErrorAlert className="alert" text={this.state.errorText} />
+        <ErrorAlert text={this.state.errorText} />
         <span className='Number-input'>
           Show
-            <input
+          <input
             className='Number-input-field'
             type='number'
             value={this.state.eventNumber}
@@ -37,8 +38,8 @@ class NumberOfEvents extends Component {
           />
           Events
         </span>
-      </div >
-    )
+      </div>
+    );
   }
 }
 
