@@ -195,7 +195,6 @@ async function getAccessToken() {
     return accessToken;
   }
 
-  // If the access_token is expired, we try to renew it by using refresh_token
   const refreshToken = localStorage.getItem('refresh_token');
   return getOrRenewAccessToken('renew', refreshToken);
 }
