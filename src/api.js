@@ -201,17 +201,21 @@ async function getAccessToken() {
 
 async function getOrRenewAccessToken(type, key) {
   let url;
+  let tokenInfo;
   if (type === 'get') {
     url =
       'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' +
       key;
+
+    tokenInfo = await axios.get(url);
+
   } else if (type === 'renew') {
     url =
       'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
       key;
   }
 
-  const tokenInfo = await axios.get(url);
+  tokenInfo = await axios.post(url);
 
   localStorage.setItem('access_token', tokenInfo.data.access_token);
   localStorage.setItem('refresh_token', tokenInfo.data.refresh_token);
