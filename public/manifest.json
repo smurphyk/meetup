@@ -3,14 +3,9 @@
   "name": "Murph's Meetup App",
   "icons": [
     {
-      "src": "favicon.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",

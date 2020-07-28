@@ -183,7 +183,7 @@ async function getAccessToken() {
 
     if (!code) {
       window.location.href =
-        'https://cors-anywhere.herokuapp.com/https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=https://smurphyk.github.io/meetup/';
+        'https://secure.meetup.com/oauth2/authorize?client_id=hctp7f58q3afe9mvsfnt68cvus&response_type=code&redirect_uri=https://smurphyk.github.io/meetup/';
       return null;
     }
     return getOrRenewAccessToken('get', code);
@@ -204,10 +204,10 @@ async function getOrRenewAccessToken(type, key) {
   let url;
   if (type === 'get') {
     url =
-      'https://cors-anywhere.herokuapp.com/https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' + key;
+      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/token/' + key;
   } else if (type === 'renew') {
     url =
-      'https://cors-anywhere.herokuapp.com/https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' + key;
+      'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' + key;
   }
 
   const tokenInfo = await axios.get(url);
