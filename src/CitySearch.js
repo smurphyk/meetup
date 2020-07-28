@@ -11,10 +11,10 @@ class CitySearch extends Component {
   handleInputChanged = (event) => {
     const value = event.target.value;
     this.setState({ query: value });
-    getSuggestions(value).then((suggestions) => {
+    getSuggestions(value).then(suggestions => {
       this.setState({ suggestions });
 
-      if (value && suggestions.length === 0) {
+      if (value.length > 1 && suggestions.length === 0) {
         this.setState({
           infoText:
             'That city does not exist on this Earth. If you are from a different planet or dimension, you should probably go back and use the meetup app there.',
