@@ -213,9 +213,10 @@ async function getOrRenewAccessToken(type, key) {
     url =
       'https://lolz058xmj.execute-api.us-east-1.amazonaws.com/dev/api/refresh/' +
       key;
-  }
 
-  tokenInfo = await axios.post(url);
+    tokenInfo = await axios.post(url);
+
+  }
 
   localStorage.setItem('access_token', tokenInfo.data.access_token);
   localStorage.setItem('refresh_token', tokenInfo.data.refresh_token);
