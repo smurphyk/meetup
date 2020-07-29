@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { PieChart, Pie, Legend, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 
 class Event extends Component {
   state = {
@@ -13,6 +14,11 @@ class Event extends Component {
 
   render() {
     const { event } = this.props;
+    const colors = ['#ff6b0f', '#348ceb']
+    const attendance = [
+      { name: "Attending", value: event.yes_rsvp_count },
+      { name: "Remaining Slots", value: event.rsvp_limit - event.yes_rsvp_count }
+    ];
     return (
       <div className='Event-grid'>
         <div className='Event-grid-item'>
@@ -24,6 +30,22 @@ class Event extends Component {
           <p className='Event-rsvp'>
             {event.yes_rsvp_count + ' people are attending'}
           </p>
+          {event.yes_rsvp_count && event.rsvp_limit ?
+            <ResponsiveContainer height={200}>
+              <PieChart>
+                <Pie data={attendance} fill="#696969" dataKey="value" nameKey="name" cx="50%" cy="50%" label>
+                  {
+                    attendance.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={colors[index]} />
+                    ))
+                  }
+                </Pie>
+                <Legend />
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+            : null
+          }
           {this.state.showDetails ? (
             <span className='Event-details'>
               {event.venue ? (

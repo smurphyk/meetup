@@ -170,6 +170,14 @@ input[type='number'] {
   text-align: right;
 }
 
+.chart {
+  background-color: #fff;
+  border: 5px outset #348ceb;
+  border-radius: 35px;
+  margin: 0 auto;
+  margin-bottom: 3rem;
+}
+
 @media (max-width: 700px) {
   .EventList {
     grid-template-columns: 1fr;
