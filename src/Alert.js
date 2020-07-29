@@ -27,9 +27,32 @@ class InfoAlert extends Alert {
     this.color = 'blue';
     this.backgroundColor = 'white';
   }
+
+  getStyle = () => {
+    return {
+      color: this.color,
+      fontWeight: 'bold',
+      fontStyle: 'italic',
+      margin: '2rem auto'
+    };
+  }
 }
 
-export { InfoAlert };
+class WarningAlert extends Alert {
+  constructor(props) {
+    super(props);
+    this.color = 'orange'
+  }
+
+  getStyle = () => {
+    return {
+      color: this.color,
+      fontWeight: 'bold',
+      fontStyle: 'italic',
+      margin: '2rem auto'
+    };
+  }
+}
 
 class ErrorAlert extends Alert {
   constructor(props) {
@@ -37,6 +60,15 @@ class ErrorAlert extends Alert {
     this.color = 'red';
     this.backgroundColor = 'white';
   }
+
+  getStyle = () => {
+    return {
+      color: this.color,
+      fontWeight: 'bold',
+      fontStyle: 'italic',
+      margin: '2rem auto'
+    };
+  }
 }
 
-export { ErrorAlert };
+export { InfoAlert, WarningAlert, ErrorAlert };
