@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-color: #002259;
+  background-position: center;
 }
 
 .App * {
@@ -31,6 +32,8 @@ input[type='number'] {
   line-height: 20px;
   align-self: center;
   height: 38px;
+  margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 .Number-input {
@@ -80,9 +83,13 @@ input[type='number'] {
 .EventList {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  width: 100%;
-  margin: 5rem auto;
+  gap: 2rem;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.Event-grid {
+  margin: 1rem auto;
 }
 
 .Event-grid-item {
@@ -90,7 +97,7 @@ input[type='number'] {
   width: 100%;
   padding: 2rem;
   margin-bottom: 10px;
-  text-align: left;
+  text-align: center;
   border: 5px outset #348ceb;
   border-radius: 50px;
   position: relative;
@@ -162,3 +169,10 @@ input[type='number'] {
   margin: 20px 0 50px;
   text-align: right;
 }
+
+@media (max-width: 700px) {
+  .EventList {
+    grid-template-columns: 1fr;
+  }
+}
+

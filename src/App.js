@@ -12,6 +12,7 @@ class App extends Component {
   state = {
     events: [],
     page: null,
+    warningText: '',
   };
 
   componentDidMount() {
@@ -25,7 +26,7 @@ class App extends Component {
         this.setState({ events })
         if (!navigator.onLine) {
           this.setState({
-            warningText: "You're offline, you goofball! All good though, here's your cached data, because we don't judge!"
+            warningText: "No internet? No worries! We have your cached data right here!"
           })
         }
         else {
@@ -51,9 +52,9 @@ class App extends Component {
     return (
       <div className='App'>
         <CitySearch updateEvents={this.updateEvents} />
-        <EventList events={this.state.events} />
         <NumberOfEvents updateEvents={this.updateEvents} />
         <WarningAlert text={this.state.warningText} />
+        <EventList events={this.state.events} />
       </div>
     );
   }

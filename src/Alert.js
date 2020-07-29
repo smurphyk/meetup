@@ -24,8 +24,7 @@ class Alert extends Component {
 class InfoAlert extends Alert {
   constructor(props) {
     super(props);
-    this.color = 'blue';
-    this.backgroundColor = 'white';
+    this.color = 'red';
   }
 
   getStyle = () => {
@@ -33,7 +32,7 @@ class InfoAlert extends Alert {
       color: this.color,
       fontWeight: 'bold',
       fontStyle: 'italic',
-      margin: '2rem auto'
+      margin: '0.5rem auto'
     };
   }
 }
@@ -49,7 +48,7 @@ class WarningAlert extends Alert {
       color: this.color,
       fontWeight: 'bold',
       fontStyle: 'italic',
-      margin: '2rem auto'
+      margin: '0.5rem auto'
     };
   }
 }
@@ -58,7 +57,6 @@ class ErrorAlert extends Alert {
   constructor(props) {
     super(props);
     this.color = 'red';
-    this.backgroundColor = 'white';
   }
 
   getStyle = () => {
@@ -66,7 +64,7 @@ class ErrorAlert extends Alert {
       color: this.color,
       fontWeight: 'bold',
       fontStyle: 'italic',
-      margin: '2rem auto'
+      margin: '0.5rem auto'
     };
   }
 }

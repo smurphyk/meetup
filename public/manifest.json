@@ -3,14 +3,15 @@
   "name": "Murph's Meetups",
   "icons": [
     {
-      "src": "logo.png",
+      "src": "icon.png",
       "sizes": "36x36, 48x48, 72x72, 96x96, 144x144, 192x192, 512x512",
       "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "maskable",
+      "background_color": "#348ceb"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000",
+  "theme_color": "#348ceb",
   "background_color": "#000"
 }
