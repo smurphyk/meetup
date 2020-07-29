@@ -5,6 +5,7 @@ import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from './api';
 import { WarningAlert } from './Alert';
+import moment from 'moment';
 
 class App extends Component {
   _isMounted = false;
@@ -43,6 +44,28 @@ class App extends Component {
       });
     }
   };
+
+  countEventsOnADate = (date) => {
+    let count = 0;
+    for (let i = 0; i < this.state.events.length; i += 1) {
+      if (this.state.events[i].local_date === date) {
+        count += 1;
+      }
+    }
+    return count;
+  }
+
+  getData = () => {
+    const next7Days = [];
+    const currentDate = moment();
+    for (let i = 0; i < 7; i += 1) {
+      currentDate.add(1, 'days');
+      const dateString = currentDate.format('YYYY-MM-DD');
+      const count = this.countEventsOnADate(dateString);
+      next7Days.push({ date: dateString, number: count });
+    }
+    return next7Days;
+  }
 
   componentWillUnmount() {
     this._isMounted = false;
