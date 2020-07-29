@@ -14,7 +14,7 @@ class Event extends Component {
   render() {
     const { event } = this.props;
     return (
-      <div className='Event'>
+      <div className='Event-grid-item'>
         <p className='Event-time'>
           {event.local_time + '-' + event.local_date}
         </p>
@@ -44,7 +44,7 @@ class Event extends Component {
             ></div>
             <p className='Event-visibility'>{event.visibility}</p>
             <a className='Event-link' href={event.link}>
-              Event Link
+              Link
             </a>
           </span>
         ) : null}
@@ -57,13 +57,13 @@ class Event extends Component {
               Show Less
             </button>
           ) : (
-            <button
-              className='Event-details-button'
-              onClick={this.toggleDetails}
-            >
-              Details
-            </button>
-          )}
+              <button
+                className='Event-details-button'
+                onClick={this.toggleDetails}
+              >
+                Details
+              </button>
+            )}
         </div>
       </div>
     );
