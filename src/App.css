@@ -1,11 +1,9 @@
 .App {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   padding: 2% 5%;
-  background-image: url('background.png');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-color: #002259;
+  background-color: #aad2af;
   background-position: center;
 }
 
@@ -20,6 +18,33 @@ ul {
 
 p {
   margin: 5px 0;
+}
+
+header {
+  width: 100%;
+  font-size: 5rem;
+  font-weight: bold;
+  font-family: 'Architects Daughter', cursive;
+}
+
+.title__container {
+  margin: 0 auto;
+  width: 65%;
+  padding: 1rem;
+  background-color: #ff5959;
+  border-radius: 50%;
+  box-shadow: -.5rem -.1rem 1rem #ff5959;
+  margin-bottom: 4rem;
+  border: 1px solid #000;
+}
+
+.header__title {
+  color: transparent;
+  background-image: url(https://media.giphy.com/media/3oz8xF2tbONaIIy92M/giphy.gif);
+  background-size: fill;
+  -webkit-background-clip: text;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: #000;
 }
 
 input[type='text'],
@@ -80,32 +105,36 @@ input[type='number'] {
   background-color: #bcdcdb;
 }
 
+.events-container {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.Event-grid__item {
+  display: inline-block;
+  width: 33%;
+}
+
 .EventList {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-.Event-grid {
-  margin: 1rem auto;
+  width: 100%;
+  color: #284d5e;
 }
 
 .Event-grid-item {
-  display: inline-block;
-  width: 100%;
-  padding: 2rem;
-  margin-bottom: 10px;
-  text-align: center;
-  border: 5px outset #348ceb;
+  padding: 1.5rem 1.5rem .75rem 1.5rem;
+  margin-bottom: 1rem;
+  text-align: left;
   border-radius: 50px;
-  position: relative;
-  background-color: #696969;
-  opacity: 0.9;
+  box-shadow: 0 1px 3px #000, 0 1px 2px #000;
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  width: auto;
+  word-break: break-word;
+  background-color: #b1b1b1;
   color: #000;
-  font-size: 120%;
-  font-weight: bold;
+  opacity: 0.8;
 }
 
 .Event-description {
@@ -116,6 +145,7 @@ input[type='number'] {
 .Event-time {
   color: #f00000;
   font-size: 110%;
+  font-weight: bold;
 }
 
 .Event-name {
