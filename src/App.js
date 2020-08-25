@@ -29,7 +29,7 @@ class App extends Component {
   updateEvents = (lat, lon, page) => {
     getEvents(lat, lon, page ? page : this.state.page).then((events) => {
       if (this._isMounted) {
-        this.setState({ events })
+        this.setState({ events, renderedEvents: events, filterEvents: false })
         if (!navigator.onLine) {
           this.setState({
             warningText: "No internet? No worries! We have your cached data right here!"
@@ -119,39 +119,37 @@ class App extends Component {
     return (
       <div className='app'>
         <Header />
-        <div className="body">
-          <CitySearch updateEvents={this.updateEvents} />
-          <NumberOfEvents updateEvents={this.updateEvents} />
-          <WarningAlert text={this.state.warningText} />
-          {this.state.showEvents ?
-            <button className="app__events-button" onClick={this.chartDisplay}>View Upcoming Events</button>
-            :
-            <button className="app__events-button" onClick={this.chartDisplay}>View Upcoming Events</button>
-          }
-          {this.state.showEvents ?
-            <ResponsiveContainer className="app__chart" height={400}>
-              <BarChart
-                margin={{
-                  top: 20, right: 20, bottom: 20, left: 20,
-                }}
-                data={this.getData()}>
-                <XAxis type="category" dataKey="Date" interval="preserveStartEnd" />
-                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-                <Bar className="app__chart-bar" dataKey="Events" fill="#ff5959" onClick={this.getEvents}>
-                  <LabelList dataKey="Events" position="top" />
-                </Bar>
-              </BarChart>
-            </ResponsiveContainer>
-            :
-            null}
-          {this.state.filterEvents ?
-            <div className="events__container">
-              <button className="app__events-button" onClick={this.resetEvents}>All Events</button>
-            </div>
-            :
-            null}
-          <EventList events={this.state.renderedEvents} />
-        </div>
+        <CitySearch updateEvents={this.updateEvents} />
+        <NumberOfEvents updateEvents={this.updateEvents} />
+        <WarningAlert text={this.state.warningText} />
+        {this.state.showEvents ?
+          <button className="app__events-button" onClick={this.chartDisplay}>View Upcoming Events</button>
+          :
+          <button className="app__events-button" onClick={this.chartDisplay}>View Upcoming Events</button>
+        }
+        {this.state.showEvents ?
+          <ResponsiveContainer className="app__chart" height={400}>
+            <BarChart
+              margin={{
+                top: 20, right: 20, bottom: 20, left: 20,
+              }}
+              data={this.getData()}>
+              <XAxis type="category" dataKey="Date" interval="preserveStartEnd" />
+              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+              <Bar className="app__chart-bar" dataKey="Events" fill="#ff5959" onClick={this.getEvents}>
+                <LabelList dataKey="Events" position="top" />
+              </Bar>
+            </BarChart>
+          </ResponsiveContainer>
+          :
+          null}
+        {this.state.filterEvents ?
+          <div className="events__container">
+            <button className="app__events-button" onClick={this.resetEvents}>All Events</button>
+          </div>
+          :
+          null}
+        <EventList events={this.state.renderedEvents} />
       </div>
     );
   }

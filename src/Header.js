@@ -5,8 +5,8 @@ class Header extends Component {
   render() {
     return (
       <header>
-        <div className="title__container">
-          <h1 className="header__title">Murph's Meetups</h1>
+        <div className="header">
+          <p className="header__title">Murph's Meetups</p>
         </div>
       </header>
     )

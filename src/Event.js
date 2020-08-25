@@ -86,9 +86,9 @@ class Event extends Component {
           : null}
         <div className="event__button-div">
           {this.state.showDetails ?
-            <button className="details__button" onClick={this.toggleDetails}>Tell Me Less</button>
+            <button className="event__details-button" onClick={this.toggleDetails}>Tell Me Less</button>
             :
-            <button className="details__button" onClick={this.toggleDetails}>Tell Me More!</button>}
+            <button className="event__details-button" onClick={this.toggleDetails}>Tell Me More!</button>}
         </div>
       </div>
     );
