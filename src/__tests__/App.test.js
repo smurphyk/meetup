@@ -8,6 +8,7 @@ import { mockEvents } from '../mock-data/mock-events';
 
 describe('<App /> component', () => {
   let AppWrapper;
+
   beforeAll(() => {
     AppWrapper = shallow(<App />);
   });
@@ -28,16 +29,20 @@ describe('<App /> component', () => {
 describe('<App /> integration', () => {
   test('get list of events after user selects a city', async () => {
     const AppWrapper = mount(<App />);
+    const CitySearchWrapper = AppWrapper.find(CitySearch);
+
     AppWrapper.instance().updateEvents = jest.fn();
     AppWrapper.instance().forceUpdate();
-    const CitySearchWrapper = AppWrapper.find(CitySearch);
+
     CitySearchWrapper.instance().handleItemClicked('name_string', 1.1, 1.2);
+
     expect(AppWrapper.instance().updateEvents).toHaveBeenCalledTimes(1);
     expect(AppWrapper.instance().updateEvents).toHaveBeenCalledWith(
       1.1,
       1.2,
       null
     );
+
     AppWrapper.unmount();
   });
 
@@ -51,7 +56,9 @@ describe('<App /> integration', () => {
   test('API is sending the correct number of events', async () => {
     const AppWrapper = shallow(<App />);
     AppWrapper.instance().updateEvents(null, null, 4);
+
     await AppWrapper.update();
+
     expect(AppWrapper.state('events')).toHaveLength(4);
   });
 });

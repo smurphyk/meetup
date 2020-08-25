@@ -5,7 +5,7 @@ import Event from './Event';
 class EventList extends Component {
   render() {
     return (
-      <ul className='EventList'>
+      <ul className='event__list'>
         {this.props.events.map((event) => (
           <li key={event.id}>
             <Event event={event} />

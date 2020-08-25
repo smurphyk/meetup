@@ -7,7 +7,7 @@ import NumberOfEvents from './NumberOfEvents';
 import { getEvents } from './api';
 import { WarningAlert } from './Alert';
 import moment from 'moment';
-import { BarChart, Bar, LabelList, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, LabelList, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 class App extends Component {
   _isMounted = false;
@@ -117,27 +117,40 @@ class App extends Component {
 
   render() {
     return (
-      <div className='App'>
+      <div className='app'>
         <Header />
-        <div className="Body">
+        <div className="body">
           <CitySearch updateEvents={this.updateEvents} />
           <NumberOfEvents updateEvents={this.updateEvents} />
           <WarningAlert text={this.state.warningText} />
-          <ResponsiveContainer height={400}>
-            <BarChart className="chart"
-              margin={{
-                top: 20, right: 20, bottom: 20, left: 20,
-              }}>
-              <CartesianGrid />
-              <XAxis type="category" dataKey="date" name="date" />
-              <YAxis type="number" dataKey="number" name="number of events" allowDecimals={false} />
-              <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-              <Bar data={this.getData()} fill="#000" />
-            </BarChart>
-          </ResponsiveContainer>
-          <div className="events-container">
-            <EventList events={this.state.events} />
-          </div>
+          {this.state.showEvents ?
+            <button className="app__events-button" onClick={this.chartDisplay}>View Upcoming Events</button>
+            :
+            <button className="app__events-button" onClick={this.chartDisplay}>View Upcoming Events</button>
+          }
+          {this.state.showEvents ?
+            <ResponsiveContainer className="app__chart" height={400}>
+              <BarChart
+                margin={{
+                  top: 20, right: 20, bottom: 20, left: 20,
+                }}
+                data={this.getData()}>
+                <XAxis type="category" dataKey="Date" interval="preserveStartEnd" />
+                <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+                <Bar className="app__chart-bar" dataKey="Events" fill="#ff5959" onClick={this.getEvents}>
+                  <LabelList dataKey="Events" position="top" />
+                </Bar>
+              </BarChart>
+            </ResponsiveContainer>
+            :
+            null}
+          {this.state.filterEvents ?
+            <div className="events__container">
+              <button className="app__events-button" onClick={this.resetEvents}>All Events</button>
+            </div>
+            :
+            null}
+          <EventList events={this.state.renderedEvents} />
         </div>
       </div>
     );
