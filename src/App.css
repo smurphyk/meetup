@@ -73,13 +73,16 @@ input[type='number'] {
   align-self: center;
   height: 2.5rem;
   margin: 0 1rem;
-  margin-bottom: 2rem;
   font-family: 'Architects Daughter', cursive; 
   font-weight: bold;
 }
 
 input[type='number'] {
   width: 4rem;
+}
+
+input[type='text'] {
+  width: 100%;
 }
 
 .city {
@@ -89,15 +92,16 @@ input[type='number'] {
 .citySearch {
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 }
 
 .suggestions {
-  width: 20rem;
-  align-self: center;
+  width: inherit;
+  padding: .1rem;
   margin: 0 auto;
   margin-bottom: 4rem;
   font-size: 14px;
-  box-shadow: -.1rem -.1rem 1rem #000;
+  box-shadow: .1rem .1rem 1rem #000;
 }
 
 .suggestions > li {
@@ -105,11 +109,7 @@ input[type='number'] {
   padding: .5rem .5rem .5rem .6rem;
   background-color: #eee;
   cursor: default;
-}
-
-.suggestions > li:last-child {
-  border-bottom-left-radius: .4rem;
-  border-bottom-right-radius: .4rem;
+  list-style: none;
 }
 
 .suggestions > li:hover {
